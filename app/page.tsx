@@ -35,12 +35,13 @@ export default function Home() {
             </div>
             <div className="flex-1">
               <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-                <Image
-                  src="/placeholder-j6rwx.png"
-                  alt="ZeroVO: Visual Odometry with Minimal Assumptions"
-                  width={600}
-                  height={400}
-                  className="object-cover"
+                <video 
+                  src="/videos/VIDEO_final.mp4" 
+                  controls
+                  autoPlay={false}
+                  loop={false}
+                  muted={false}
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
             </div>

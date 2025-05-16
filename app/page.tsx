@@ -62,7 +62,7 @@ export default function Home() {
             },
             { 
               name: "Zekai Yin*", 
-              image: "/assets/zekaiyin.png", 
+              image: "/assets/zekaiyin_.png", 
               homepage: "https://zekai-yin.github.io" // Replace with actual homepage URL
             },
             { 
@@ -172,7 +172,7 @@ export default function Home() {
                   <Image
                     src="/assets/KITTI_results.png"
                     alt="Qualitative Results on KITTI"
-                    width={900}
+                    width={1400}
                     height={500}
                     className="rounded-lg"
                   />

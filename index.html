@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="We propose Visual Geometry Grounded Transformer (VGGT), a feed-forward neural network that directly predicts all key 3D scene attributes from single or multiple (up to hundreds) image views within seconds.">
+  <meta name="keywords" content="VGGT, Camera, Point map, Depth map, 3D reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VGGT: Visual Geometry Grounded Transformer</title>
+
+
+  <meta property="og:title" content="VGGT: Visual Geometry Grounded Transformer." />
+  <meta property="og:description"
+    content="We propose Visual Geometry Grounded Transformer (VGGT), a feed-forward neural network that directly predicts all key 3D scene attributes from single or multiple (up to hundreds) image views within seconds." />
+  <!-- Twitter automatically scrapes this. Go to https://cards-dev.twitter.com/validator?
+      if you update and want to force Twitter to re-scrape. -->
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:title" content="VGGT: Visual Geometry Grounded Transformer." />
+  <meta property="twitter:description"
+    content="We propose Visual Geometry Grounded Transformer (VGGT), a feed-forward neural network that directly predicts all key 3D scene attributes from single or multiple (up to hundreds) image views within seconds." />
+  <!-- <meta property="twitter:image"         content="https://3dmagicpony.github.io/resources/overview.jpg" /> -->
+
+  <!-- MathJax library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSQGH8Q0WV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TSQGH8Q0WV');
+  </script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-4 publication-title" style="font-size: 2rem;">VGGT: Visual Geometry Grounded Transformer</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://jytime.github.io/">Jianyuan Wang</a><sup>1, 2</sup>,
+              </span>
+              &nbsp;&nbsp;&nbsp;
+              <span class="author-block">
+                <a href="https://silent-chen.github.io/">Minghao Chen</a><sup>1, 2</sup>,
+              </span>
+              &nbsp;&nbsp;&nbsp;
+              <span class="author-block"> 
+                <a href="https://nikitakaraevv.github.io/">Nikita Karaev</a><sup>1, 2</sup>
+              </span>
+              <br>
+              <span class="author-block">
+                <a href="https://www.robots.ox.ac.uk/~vedaldi/">Andrea Vedaldi</a><sup>1, 2</sup>,
+              </span>
+              &nbsp;&nbsp;&nbsp;
+              <span class="author-block">
+                <a href="https://chrirupp.github.io/">Christian Rupprecht</a><sup>1</sup>,
+              </span>
+              &nbsp;&nbsp;&nbsp;
+              <span class="author-block">
+                <a href="https://d-novotny.github.io/">David Novotny</a><sup>2</sup>
+              </span>
+            </div>
+
+
+
+            <div class="is-size-5 publication-authors" style="margin-bottom: 10px;">
+              <span class="author-block" style="margin-right: 10px;"><sup>1</sup>Visual Geometry Group, University of
+                Oxford,</span>
+              <span class="author-block"><sup>2</sup>Meta AI</span>
+            </div>
+
+            <h3 class="text-dark" style="font-size: calc(12px + 0.5vw);">CVPR 2025 (Oral)</h3>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2503.11651" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/facebookresearch/vggt"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Demo Link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/facebook/vggt"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span>🤗 Demo</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <style>
+    .video-border {
+      display: inline-block;
+      padding: 2px; /* adjust thickness of your 'border' */
+      border-radius: 4px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* try different gradient colors */
+    }
+    .video-border video {
+      display: block;
+      border: none;
+      border-radius: 4px; /* match the wrapper for a consistent look */
+    }
+  </style>
+
+  <style>
+    #teaser-video {
+      max-width: 85%;
+      margin: 0 auto;
+      display: block;
+      border: none; /* remove the solid border */
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    #architecture-img {
+      width: 90%;
+      margin: 0 auto;
+      display: block;
+      border: none;
+      border-radius: 0; /* removed border radius */
+      box-shadow: none; /* removed box shadow */
+    }
+    
+    /* Enhanced style to further reduce space between buttons and teaser video */
+    .hero.teaser {
+      padding-top: 0;
+      margin-top: -3rem; /* Added negative margin to pull the teaser section up */
+    }
+    .hero.teaser .hero-body {
+      padding-top: 0; /* Reduced from 1rem to 0 */
+    }
+  </style>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser-video" autoplay muted loop playsinline height="100%">
+          <source src="./resources/teaser_video_v3_compressed_short.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle" style="text-align: center;"></h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="padding-top: 1rem;">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+
+
+          <h2 class="title is-4" style="font-weight: 700;">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We present <b>VGGT</b>, a feed-forward neural network that directly infers all key 3D attributes of a scene, including camera parameters, point maps, depth maps, and 3D point tracks, from one, a few, or hundreds of its views.
+              This approach is a step forward in 3D computer vision, where models have typically been constrained to and specialized for single tasks.
+              It is also simple and efficient, reconstructing images in under one second, and still outperforming alternatives without their post-processing utilizing visual geometry optimization techniques.
+              The network achieves state-of-the-art results in multiple 3D tasks, including camera parameter estimation, multi-view depth estimation, dense point cloud reconstruction, and point tracking.
+              We also show that using pretrained <b>VGGT</b> as a feature backbone significantly enhances  downstream tasks, such as non-rigid point tracking and feed-forward novel view synthesis. 
+            </p>
+          </div>
+          <br>
+
+
+          <h2 class="title is-4" style="font-weight: 700;">Method</h2>
+          <div class="content has-text-justified">
+            <p>
+              VGGT first patchifies the input images into tokens by DINO, and appends camera tokens for camera prediction. It then alternates between frame-wise and global self attention layers. A camera head makes the final prediction for camera extrinsics and intrinsics, while a DPT head for any dense output, such as depth maps, point maps, or feature maps for tracking.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <!-- <img id="teaser" src="https://placehold.co/600x400" alt="Teaser image" style="width: 100%;"> -->
+            <img id="architecture-img" src="./resources/architecture_v4.png" alt="Architecture">
+          </div>
+          <br>
+
+
+          <h2 class="title is-4" style="font-weight: 700;">Qualitative Visualization</h2>
+          <div class="content has-text-centered">
+            <p>
+              Reconstruction of In-the-wild Photos/Videos with VGGT. Click on any thumbnail below to view the 3D reconstruction.
+            </p>
+          </div>
+          <div class="model-viewer-container">
+            <model-viewer id="QualitativeResult"
+                          src="resources/qualitative/colosseum_v4.glb"
+                          alt="3D Model"
+                          loading="eager"
+                          touch-action="pan-y" environment-image="legacy"
+                          camera-orbit="180deg 70deg auto" 
+                          zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                          max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                          disable-shadow ar-modes="webxr scene-viewer quick-look"
+                          style="width: 90%; height: 90%; background: #ffffff; margin: 0 auto;">
+            </model-viewer>
+          </div>
+          <br>
+          <div class="content has-text-centered">
+            <div class="thumbnail-container" id="thumbnail-qualitative">
+              <!-- <img src="resources/qualitative/college.png" data-glb="resources/qualitative/college_v2.glb"> -->
+              <!-- <video src="resources/qualitative/pyramid.mp4" data-glb="resources/qualitative/pyramid.glb" loop playsinline muted></video> -->
+              <video src="resources/qualitative/colosseum.mp4" data-glb="resources/qualitative/colosseum_v4.glb" loop playsinline muted></video>
+              <video src="resources/qualitative/outdoor_room.mp4" data-glb="resources/qualitative/outdoor_room_v2.glb" loop playsinline muted></video>
+              <video src="resources/qualitative/courtroom.mp4" data-glb="resources/qualitative/courtroom_v2.glb" loop playsinline muted></video>
+              <img src="resources/qualitative/chess.jpg" data-glb="resources/qualitative/chess_v2.glb">
+              <img src="resources/qualitative/indoor.jpg" data-glb="resources/qualitative/indoor_v2.glb">
+            </div>  
+          </div>  
+          <style>
+            .thumbnail-container img, .thumbnail-container video {
+              transition: all 0.3s ease;
+              border: 3px solid transparent;
+              cursor: pointer;
+            }
+            .thumbnail-selected {
+              transform: scale(1.2);
+              border: 6px solid #79b4f2 !important; 
+              box-shadow: 0 0 10px rgba(121, 180, 242, 0.5);
+              z-index: 10;
+              position: relative;
+            }
+            
+            /* New styles for responsive horizontal gallery */
+            .thumbnail-container {
+              display: flex;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              gap: 10px;
+              padding: 10px 0;
+              -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+              scrollbar-width: thin;
+              align-items: center;
+            }
+            
+            .thumbnail-container img, 
+            .thumbnail-container video {
+              flex: 0 0 auto;
+              width: auto;
+              height: 120px; /* Consistent height */
+              object-fit: cover;
+              max-width: none;
+            }
+            
+            /* Custom scrollbar styling */
+            .thumbnail-container::-webkit-scrollbar {
+              height: 6px;
+            }
+            
+            .thumbnail-container::-webkit-scrollbar-track {
+              background: #f1f1f1;
+              border-radius: 10px;
+            }
+            
+            .thumbnail-container::-webkit-scrollbar-thumb {
+              background: #888;
+              border-radius: 10px;
+            }
+            
+            .thumbnail-container::-webkit-scrollbar-thumb:hover {
+              background: #555;
+            }
+            
+            /* Adjust for smaller screens */
+            @media (max-width: 768px) {
+              .thumbnail-container img,
+              .thumbnail-container video {
+                height: 100px;
+              }
+            }
+          </style>
+          <script>
+            // The problem is here - you're trying to select an element that doesn't exist
+            // document.querySelector('#thumbnail-qualitative img[src="resources/qualitative/college.png"]').classList.add('thumbnail-selected');
+            
+            // Instead, select the first element that actually exists in your thumbnail container
+            document.addEventListener('DOMContentLoaded', function() {
+              // Select the first element in the thumbnail container (video or image)
+              const firstThumbnail = document.querySelector('#thumbnail-qualitative video, #thumbnail-qualitative img');
+              if (firstThumbnail) {
+                firstThumbnail.classList.add('thumbnail-selected');
+                // If it's a video, play it
+                if (firstThumbnail.tagName.toLowerCase() === 'video') {
+                  firstThumbnail.play();
+                }
+              }
+              
+              document.querySelectorAll('#thumbnail-qualitative img, #thumbnail-qualitative video').forEach(el => {
+                // Rest of your click handler code remains the same
+                el.addEventListener('click', () => {
+                  const glbSrc = el.getAttribute('data-glb');
+                  const modelViewer = document.getElementById('QualitativeResult');
+                  modelViewer.setAttribute('src', glbSrc);
+                  modelViewer.cameraOrbit = "180deg 70deg auto";
+                  modelViewer.resetTurntableRotation(0);
+                  modelViewer.jumpCameraToGoal();
+
+                  // Remove selection class from all elements
+                  document.querySelectorAll('#thumbnail-qualitative img, #thumbnail-qualitative video').forEach(element => {
+                      element.classList.remove('thumbnail-selected');
+                  });
+                  
+                  // Add selection class to clicked element
+                  el.classList.add('thumbnail-selected');
+                  
+                  // Play video if it's a video element
+                  if (el.tagName.toLowerCase() === 'video') {
+                      el.play();
+                  }
+                  
+                  // Pause all other videos
+                  document.querySelectorAll('#thumbnail-qualitative video').forEach(video => {
+                      if (video !== el) {
+                          video.pause();
+                          video.currentTime = 0;
+                      }
+                  });
+                });
+              });
+            });
+          </script>
+
+          <br>
+
+          <h2 class="title is-4" style="font-weight: 700;">Qualitative Comparison</h2>
+          <div class="content has-text-justified" style="align-self: flex-start;">
+            <p>
+               VGGT significantly outperforms all other methods across various tasks. Please refer to our paper for quantitative results. Here we also provide a qualitative comparison with DUSt3R and other concurrent works such as Fast3R and FLARE (use the dropdown menu to switch).
+            </p>
+          </div>
+
+
+          <div class="model-container" id="model-compare-wrapper">
+            <!-- Model 1 Viewer with Label -->
+            <div class="model-wrapper-comparison">
+              <div class="model-label">VGGT</div>
+              <model-viewer id="modelViewerComparison1" loading="eager"
+                touch-action="pan-y" environment-image="legacy"
+                src="resources/comparison/ours/college.glb"
+                zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                style="width: 100%; height: 100%;  background: #ffffff;">
+              </model-viewer>
+            </div>
+            <!-- Model 2 Viewer with Label -->
+            <div class="model-wrapper-comparison">
+              <div class="model-label">DUSt3R</div>
+              <model-viewer id="modelViewerComparison2"loading="eager"
+                touch-action="pan-y" environment-image="legacy"
+                src="resources/comparison/dust3r/college.glb"
+                zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                style="width: 100%; height: 100%; background: #ffffff;">
+              </model-viewer>
+            </div>
+            <!-- Model 3 Viewer with Label -->
+            <div class="model-wrapper-comparison">
+              <select id="comparisonBaselineSelection" class="dropdown model-label">
+                <option value="fast3r">Fast3R</option>
+                <option value="flare">FLARE</option>
+                <!-- <option value="cut3r">CUT3R</option> -->
+              </select>
+              <model-viewer id="modelViewerComparison3" loading="eager"
+                touch-action="pan-y" environment-image="legacy"
+                src="resources/comparison/fast3r/college.glb"
+                zoom-sensitivity="0.2" camera-controls disable-tap min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m" interaction-prompt="none" shadow-intensity="0" ar
+                style="width: 100%; height: 100%; background: #ffffff;">
+              </model-viewer>
+            </div>
+          </div>
+          <div class="hero-body" style="padding: 0;">
+            <div class="content has-text-centered">
+              <div class="thumbnail-container", id="thumbnail-comparison", data-selected-name="Colosseum">                
+                <img src="resources/comparison/assets/college.png" name="college">
+                <img src="resources/comparison/assets/oil.png" name="oil">
+                <video src="resources/comparison/assets/fern.mp4" name="fern" loop playsinline muted></video>
+                <video src="resources/comparison/assets/pyramid.mp4" name="pyramid" loop playsinline muted></video>
+              </div>  
+            </div>  
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700;">BibTeX</h2>
+      <pre><code>@inproceedings{wang2025vggt,
+  title={VGGT: Visual Geometry Grounded Transformer},
+  author={Wang, Jianyuan and Chen, Minghao and Karaev, Nikita and Vedaldi, Andrea and Rupprecht, Christian and Novotny, David},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  
+
+  <section class="section" id="Acknowledgements" style="padding-top: 0rem;">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4" style="font-weight: 700;">Acknowledgements</h2>
+      <p>
+        Jianyuan Wang is supported by Facebook Research.
+      </p>
+      <p>
+        We are deeply grateful for the insightful discussions and invaluable support provided by Stanislaw Szymanowicz,  Junyu Xie, Johannes Schönberger, Shangzhe Wu, Chuanxia Zheng, Junlin Han, Ang Cao, Nikhil Keetha, Chris Offner, Shangzhan Zhang, Yuxi Xiao, Qianqian Wang, Yinghao Xu, Ceyuan Yang, Nan Xue, Yujun Shen, Roman Shapovalov, João Henriques, and Andrew Zisserman.
+      </p>
+      <p>
+        We appreciate the great examples provided by Depth-Anything-V2, Metric3D V2, MoGe, and FLARE.
+      </p>
+      <p>
+        Special thanks to Jianing Yang, Ang Cao, Zhenggang Tang, Yuchen Fan, Shangzhan Zhang, and Qianqian Wang for providing or verifying the results of their methods.
+      </p>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This webpage template is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+              under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="static/js/comparison.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial camera positions for all model viewers
+      const initialModelViewers = [
+        document.getElementById('QualitativeResult'),
+        document.getElementById('modelViewerComparison1'),
+        document.getElementById('modelViewerComparison2'),
+        document.getElementById('modelViewerComparison3')
+      ];
+      
+      // Apply consistent initial camera settings to all model viewers
+      initialModelViewers.forEach(viewer => {
+        if (viewer) {
+          viewer.addEventListener('load', () => {
+            viewer.cameraOrbit = "180deg 70deg auto";
+            if (viewer.resetTurntableRotation) {
+              viewer.resetTurntableRotation(0);
+            }
+            viewer.jumpCameraToGoal();
+          });
+        }
+      });
+      
+      // Handle comparison thumbnails
+      const firstComparisonThumbnail = document.querySelector('#thumbnail-comparison video, #thumbnail-comparison img');
+      if (firstComparisonThumbnail) {
+        firstComparisonThumbnail.classList.add('thumbnail-selected');
+        // If it's a video, play it
+        if (firstComparisonThumbnail.tagName.toLowerCase() === 'video') {
+          firstComparisonThumbnail.play();
+        }
+      }
+      
+      document.querySelectorAll('#thumbnail-comparison img, #thumbnail-comparison video').forEach(el => {
+        el.addEventListener('click', () => {
+          const name = el.getAttribute('name');
+          
+          // Update model viewers with the corresponding GLB files
+          const modelViewer1 = document.getElementById('modelViewerComparison1');
+          const modelViewer2 = document.getElementById('modelViewerComparison2');
+          const modelViewer3 = document.getElementById('modelViewerComparison3');
+          
+          modelViewer1.setAttribute('src', `resources/comparison/ours/${name}.glb`);
+          modelViewer2.setAttribute('src', `resources/comparison/dust3r/${name}.glb`);
+          
+          // For the third viewer, check the dropdown selection
+          const baseline = document.getElementById('comparisonBaselineSelection').value;
+          modelViewer3.setAttribute('src', `resources/comparison/${baseline}/${name}.glb`);
+          
+          // Reset camera positions
+          [modelViewer1, modelViewer2, modelViewer3].forEach(viewer => {
+            viewer.cameraOrbit = "180deg 70deg auto";
+            if (viewer.resetTurntableRotation) {
+              viewer.resetTurntableRotation(0);
+            }
+            viewer.jumpCameraToGoal();
+          });
+
+          // Remove selection class from all elements
+          document.querySelectorAll('#thumbnail-comparison img, #thumbnail-comparison video').forEach(element => {
+            element.classList.remove('thumbnail-selected');
+          });
+          
+          // Add selection class to clicked element
+          el.classList.add('thumbnail-selected');
+          
+          // Play video if it's a video element
+          if (el.tagName.toLowerCase() === 'video') {
+            el.play();
+          }
+          
+          // Pause all other videos
+          document.querySelectorAll('#thumbnail-comparison video').forEach(video => {
+            if (video !== el) {
+              video.pause();
+              video.currentTime = 0;
+            }
+          });
+        });
+      });
+      
+      // Handle dropdown change for the third comparison model
+      document.getElementById('comparisonBaselineSelection').addEventListener('change', function() {
+        const selectedName = document.querySelector('#thumbnail-comparison .thumbnail-selected').getAttribute('name');
+        const baseline = this.value;
+        document.getElementById('modelViewerComparison3').setAttribute('src', `resources/comparison/${baseline}/${selectedName}.glb`);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

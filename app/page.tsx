@@ -54,21 +54,44 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Authors</h2>
           <div className="flex flex-wrap justify-center gap-8">
-            {["Lei Lai", "Zekai Yin", "Eshed Ohn-Bar"].map((author, index) => (
-              <div key={index} className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
+           {[
+            { 
+              name: "Lei Lai*", 
+              image: "/assets/leilai.jpg", 
+              homepage: "https://leilai125.github.io/" // Replace with actual homepage URL
+            },
+            { 
+              name: "Zekai Yin*", 
+              image: "/assets/zekaiyin.png", 
+              homepage: "https://zekai-yin.github.io" // Replace with actual homepage URL
+            },
+            { 
+              name: "Eshed Ohn-Bar", 
+              image: "/assets/eshedohnbar.jpg", 
+              homepage: "https://eshed1.github.io" // Replace with actual homepage URL
+            }
+          ].map((author, index) => (
+            <div key={index} className="text-center">
+              <a 
+                href={author.homepage} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block hover:opacity-90 transition-opacity"
+                title={`Visit ${author.name}'s homepage`}
+              >
+                <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200 hover:shadow-lg transition-shadow">
                   <Image
-                    src={`/placeholder.svg?height=128&width=128&query=researcher portrait`}
-                    alt={author}
+                    src={author.image || `/placeholder.svg?height=128&width=128&query=${author.name} researcher portrait`}
+                    alt={author.name}
                     width={128}
                     height={128}
                     className="object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-medium">{author}</h3>
-                <p className="text-gray-600">Boston University</p>
-              </div>
-            ))}
+                <h3 className="text-lg font-medium text-blue-600 hover:underline">{author.name}</h3>
+              </a>
+            </div>
+          ))}
           </div>
         </div>
       </section>
@@ -147,7 +170,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4">Trajectory Visualization on KITTI</h3>
                 <div className="aspect-video relative">
                   <Image
-                    src="/placeholder-q8irx.png"
+                    src="/assets/KITTI_results.png"
                     alt="Qualitative Results on KITTI"
                     width={900}
                     height={500}

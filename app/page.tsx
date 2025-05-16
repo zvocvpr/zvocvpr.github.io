@@ -296,7 +296,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-6">Citation</h2>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <pre className="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
-              {`@inproceedings{lai2023zerovo,
+              {`@inproceedings{PLACE_HOLDER_DO_NOT_CITATE,
   title={ZeroVO: Visual Odometry with Minimal Assumptions},
   author={Lai, Lei and Yin, Zekai and Ohn-Bar, Eshed},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},

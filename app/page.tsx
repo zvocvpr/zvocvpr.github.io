@@ -36,7 +36,7 @@ export default function Home() {
             <div className="flex-1">
               <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
                 <video 
-                  src="/videos/VIDEO_final.mp4" 
+                  src="/assets/VIDEO_final.mp4" 
                   controls
                   autoPlay={false}
                   loop={false}
@@ -105,13 +105,22 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8">Method</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <Image
-                src="/placeholder-h0bzd.png"
-                alt="ZeroVO Architecture"
-                width={700}
-                height={500}
-                className="rounded-lg shadow-md"
-              />
+              <div className="rounded-lg shadow-md overflow-hidden" style={{ height: '500px', width: '100%' }}>
+                <object
+                  data="/assets/pipeline.pdf"
+                  type="application/pdf"
+                  width="100%"
+                  height="100%"
+                  className="rounded-lg"
+                >
+                  <p>
+                    Your browser does not support PDFs.
+                    <a href="/assets/pipeline.pdf" target="_blank" rel="noopener noreferrer">
+                      Download the PDF
+                    </a>
+                  </p>
+                </object>
+              </div>
             </div>
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold">Multimodal and Geometry-Guided Network</h3>

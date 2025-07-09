@@ -117,36 +117,6 @@
     </div>
   </section>
 
-  <!-- <section class="hero teaser">
-  <div class="hero-body">
-    <div class="columns is-centered">
-      <div class="column is-6">
-        <img src="./resources/example1.gif" />
-        <h2 class="subtitle has-text-centered">
-        </h2>
-      </div>
-    </div>
-  </div>
-</section>
- -->
-  
-  <!-- <section class="section">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3"> </h2>
-          <div class="content has-text-justified">
-            <p>
-            </p>
-            <div class="column">
-              <img src="./resources/generalized_vo.png" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
   <section class="section">
     <div class="container">
 
@@ -162,75 +132,8 @@
         </div>
       </div>
     </div>
-    <!-- Paper video. -->
-    <!-- <br />
-    <br />
-    <div id="method_video" class="columns is-centered has-text-centered">
-      <div class="column is-half">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video"> -->
-          <!-- <video controls>
-            <source src="./resources/CaT_Video.mp4" type="video/mp4">
-          </video> -->
-          <!-- <iframe src="https://www.youtube.com/embed/5tmkDHfgqvU"
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div> -->
-    <!--/ Paper video. -->
 
   </section>
-
-
-
-
-  <!-- <section class="section">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Motivation</h2>
-          <div class="content has-text-justified">
-            <p class="my-paragraph">
-              Our approach is inspired by how humans learn general representations 
-              through observation of large amouts of multi-modal data, 
-              and the successes witnessed in computer vision 
-              through multi-task frameworks and auxiliary learning.
-
-              <br>
-              
-              Humans can flexibly estimate motion in arbitrary conditions through 
-              a general understanding of salient scene properties (e.g., object sizes).
-              This general understanding is developed over large amounts of perceptual 
-              data, often multi-modal in nature in arbitrary conditions through a general 
-              understanding of salient scene properties.
-              For instance, cross-modal information processing between audio and video 
-              has been shown to play a role in spatial reasoning and proprioception.
-              Drawing from this human learning paradigm, our approach leverages extensive 
-              multimodal data through a semi-supervised training process, incorporating 
-              various auxiliary prediction tasks, including segmentation, flow, depth, 
-              and audio, to achieve generalized visual odometry without any camera intrinsic 
-              or extrinsic information in diverse environment under arbitrary conditions.
-              Our approach is also motivated by the successes witnessed in computer vision 
-              through multi-task frameworks, where auxiliary tasks, in addition to the 
-              primary learning objective, serve as a regulation to reduce the overfitting 
-              and enrich the feature representations.
-
-              <br>
-            </p>
-            <div class="column">
-              <img src="./resources/motivation.png" />
-            </div>
-             <p class="my-paragraph">             
-              The figure above illustrates the importance of audio in estimating vehicle acceleration and braking.
-              The frame is consistent with the red arrow marked on the waveform. On the left, the audio amplitude 
-              decreases and maintains a low level when the vehicle is going to wait for traffic lights.
-              On the right, the audio experiences many ups and downs associated with acceleration and braking in a narrow urban area.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <section class="section">
     <div class="container">
@@ -249,52 +152,11 @@
             
             </div>
             <div class="column">
-              <img src="./resources/pipeline.png" width="80%" />
+              <img src="./resources/pipeline.png" width="100%" />
             </div>
           </div>
         </div>
       </div>
-      
-
-      <!-- <section class="section">
-        <div class="container">
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-              <h2 class="title is-3">Model Architecture</h2>
-              <div class="content has-text-justified">
-                <p class="my-paragraph">
-                The initial teacher model (used for pseudo-labeling and filtering) encodes two 
-                concatenated image frames and predicts relative camera pose and its uncertainty. 
-                To learn effective representations for generalized VO at scale, we propose to 
-                incorporate supervision from auxiliary but potentially complementary prediction 
-                tasks in addition to the generated VO pseudo-labels.
-                Threfore, the complete cross-modal architecture leverages a similar model architecture but with 
-                added auxiliary prediction branches with complementary tasks that can further 
-                guide self-training, e.g., prediction branches for audio reconstruction, 
-                dynamic object segmentation, optical flow, and depth.
-                <\p>
-              </div>
-              <div class="column">
-                <img src="./resources/model_structure.png" width="80%" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Model Structure</h2>
-          <div class="content has-text-justified">
-            
-          </div>
-            <div class="column">
-              <img src="./resources/model_structure.png" width="65%" />
-            </div>
-          </div>
-        </div>
-      </div> -->
-
     </div>
   </section>
 
@@ -379,24 +241,25 @@
   </section>
 
 
-  <!-- <section class="section id=" BibTeX"">
+  <section class="section id=" BibTeX"">
     <div class="container">
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title is-3">BibTeX</h2>
           <div class="content has-text-justified">
-            <pre><code>@inproceedings{zhang2023coaching,
-                                title={Coaching a Teachable Student},
-                                author={Zhang, Jimuyang and Huang, Zanming and Ohn-Bar, Eshed},
-                                booktitle={CVPR},
-                                year={2023}
-                        }</code></pre>
+            <pre><code>@inproceedings{lai2025zerovo,
+                        title={ZeroVO: Visual Odometry with Minimal Assumptions},
+                        author={Lai, Lei and Yin, Zekai and Ohn-Bar, Eshed},
+                        booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+                        pages={17092--17102},
+                        year={2025}
+                      }</code></pre>
 
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <section class="section id=" BibTeX"">
     <div class="container">

@@ -240,7 +240,7 @@
           <h2 class="title is-3">Method</h2>
           <div class="content has-text-justified">
             <p class="my-paragraph">
-            Given a pair of input images, our model computes a rich multimodal embedding through a transformer-based fusion module. The embedding is then passed to a two-branch decoder MLP that outputs realworld translation and rotation. Our architecture leverages cross-attention to fuse complementary cues, including flow, depth,
+            Our method facilitates generalization via minimal and versatile image-based priors, integrated throughout our model structure. Given a pair of input images, our model computes a rich multimodal embedding through a transformer-based fusion module. The embedding is then passed to a two-branch decoder MLP that outputs realworld translation and rotation. Our architecture leverages cross-attention to fuse complementary cues, including flow, depth,
             camera intrinsics, and language-based features in a geometry-aware manner. The language prior is first used to refine both the depth map
             and 2D flow estimates. The refined depth is then unprojected into 3D (using estimated parameters) to compute scene flow, which is further
             enhanced and fused with additional features before decoding. By embedding geometric reasoning and multimodal priors directly into the
@@ -256,7 +256,7 @@
       </div>
       
 
-      <section class="section">
+      <!-- <section class="section">
         <div class="container">
           <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
@@ -280,7 +280,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <!-- <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -305,19 +305,17 @@
           <h2 class="title is-3">Result</h2>
           <div class="content has-text-justified">
             <p class="my-paragraph">
-            <b>Analysis on the KITTI Benchmark.</b> 
-            We abbreviate 'intrinsics-free' as I (i.e., a method which does not assume the intrinsics) 
-            and 'real-world scale' as S (i.e., a method is able to recover real-world scale). To ensure 
-            meaningful comparison, we categorize models based on supervision type. Firstly, we present 
-            unsupervised learning methods, followed by supervised learning methods, then generalized VO 
-            methods, and finally our XVO ablation. In the case of TartanVO, we analyze robustness to 
-            noise applied to the intrinsics. We train two teacher models: one based on KITTI (as shown 
-            in supervised learning approaches) and the other on nuScenes (as displayed at the end of 
-            the Table with ablations).
+            <b>Comparative Analysis Across Datasets.</b> 
+            We compare ZeroVO variants with existing baselines using standard metrics of translation, rotation, absolute trajectory, and scale errors. All methods are provided with estimated camera intrinsics and metric depth. ZeroVO+ is
+            our model trained with further data using semi-supervision, and LiteZeroVO+ is a smaller model variant for resource-constrained settings.
+            Our models demonstrate strong performance across metrics and datasets, particularly in metric translation estimation. As highlighted by
+            the scale error, GTA and nuScenes contain challenging evaluation settings, including nighttime, weather variations, haze, and reflections.
+            We note that TartanVO and DPVO baselines (in gray) only predict up-to-scale motion and use privileged information, i.e., ground-truth
+            scale alignment in evaluation.
             </p>
           </div>
           <div class="column">
-            <img src="./resources/result1.png" width="90%" />
+            <img src="./resources/cross_datasets.png" width="90%" />
           </div>
         </div>
       </div>
@@ -330,16 +328,15 @@
         <div class="column is-four-fifths">
           <div class="content has-text-justified">
             <p class="my-paragraph">
-            <b>Average Quantitative Results across Datasets.</b> 
-            We test on KITTI (sequences 00-10), Argoverse 2, and the unseen regions in nuScenes. 
-            All results are the average over all scenes. We present translation error, rotation 
-            error and scale error. Approaches such as TartanVO do not estimate real-world scale 
-            but may be aligned with ground truth (GT) scale in evaluation. A, S, F, D are the 
-            abbreviation of Audio, Seg, Flow, Depth.
+            <b>Ablation Analysis for Model and Training Components.</b> 
+            We analyze various model components: Flow module (<b>F</b>), Depth
+            module (<b>D</b>), Language prior (<b>L</b>), Semi-supervised training (<b>S</b>), and Pseudo-label Selection (<b>P</b>). Flow, depth, and language correspond to
+            the proposed supervised ZeroVO model. Results with additional semi-supervised training are shown as ZeroVO+ (showing state-of-the-art
+            performance by integrating all of our proposed components).
             </p>
           </div>
           <div class="column">
-            <img src="./resources/result2.png" width="80%" />
+            <img src="./resources/ablation.png" width="80%" />
           </div>
         </div>
       </div>

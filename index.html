@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="XVO: Generalized Visual Odometry via Cross-Modal Self-Training">
-  <meta name="keywords" content="XVO: Generalized Visual Odometry">
+  <meta name="description" content="ZeroVO: Visual Odometry with Minimal Assumptions">
+  <meta name="keywords" content="ZeroVO: Visual Odometry with Minimal Assumptions">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>XVO: Generalized Visual Odometry via Cross-Modal Self-Training</title>
+  <title>ZeroVO: Visual Odometry with Minimal Assumptions</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -24,14 +24,14 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-  <meta property="og:site_name" content="XVO: Generalized Visual Odometry via Cross-Modal Self-Training" />
+  <meta property="og:site_name" content="ZeroVO: Visual Odometry with Minimal Assumptions" />
   <meta property="og:type" content="video.other" />
-  <meta property="og:title" content="XVO: Generalized Visual Odometry via Cross-Modal Self-Training" />
-  <meta property="og:description" content="Lai, et al. XVO: Generalized Visual Odometry via Cross-Modal Self-Training." />
+  <meta property="og:title" content="ZeroVO: Visual Odometry with Minimal Assumptions" />
+  <meta property="og:description" content="Lai, et al. ZeroVO: Visual Odometry with Minimal Assumptions." />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="XVO: Generalized Visual Odometry via Cross-Modal Self-Training" />
-  <meta name="twitter:description" content="Lai, et al. XVO: Generalized Visual Odometry via Cross-Modal Self-Training." />
+  <meta name="twitter:title" content="ZeroVO: Visual Odometry with Minimal Assumptions" />
+  <meta name="twitter:description" content="Lai, et al. ZeroVO: Visual Odometry with Minimal Assumptions." />
 
   <script src="https://www.youtube.com/iframe_api"></script>
 </head>
@@ -43,22 +43,21 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-2 publication-title">XVO: Generalized Visual Odometry via Cross-Modal Self-Training</h1>
+            <h1 class="title is-2 publication-title">ZeroVO: Visual Odometry with Minimal Assumptions</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="https://cs-people.bu.edu/leilai/">Lei Lai*</a>&emsp;
-                <a href="https://www.linkedin.com/in/zhongkai-leon-shangguan-52b465152">Zhongkai Shangguan*</a>&emsp;
-                <a href="https://jimuyangz.github.io/">Jimuyang Zhang</a>&emsp;
+                <a href="https://leilai125.github.io/">Lei Lai*</a>&emsp;
+                <a href="https://zekai-yin.github.io">Zekai Yin*</a>&emsp;
                 <a href="https://eshed1.github.io/">Eshed Ohn-Bar</a>&emsp;
                 <br />Boston University
-                <span class="brmod"></span>ICCV 2023</span>
+                <span class="brmod"></span>CVPR 2025</span>
             </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
                 <!-- PDF Link. -->
                 <span class="link-block">
-                  <a href="./resources/XVO.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <a href="./resources/CAMERA_READY.pdf" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
@@ -66,7 +65,7 @@
                   </a>
                 </span>
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2309.16772" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2506.08005" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -84,11 +83,19 @@
                 </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/h2xlab/XVO" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/h2xlab/ZVO" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
                     <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/h2xlab/ZVO" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Datasets</span>
                   </a>
                 </span>
                 <!-- Slides Link. -->
@@ -123,7 +130,7 @@
 </section>
  -->
   
-  <section class="section">
+  <!-- <section class="section">
     <div class="container">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -138,7 +145,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section class="section">
     <div class="container">
@@ -149,26 +156,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p class="my-paragraph">
-                  We propose XVO, a semi-supervised learning method for training generalized 
-              monocular Visual Odometry (VO) models with robust off-the-self operation 
-              across diverse datasets and settings. In contrast to standard monocular 
-              VO approaches which often study a known calibration within a single dataset, 
-              XVO efficiently learns to recover relative pose with real-world scale from 
-              visual scene semantics, i.e., without relying on any known camera parameters. 
-              We optimize the motion estimation model via self-training from large amounts 
-              of unconstrained and heterogeneous dash camera videos available on YouTube. 
-              Our key contribution is twofold. First, we empirically demonstrate the benefits 
-              of semi-supervised training for learning a general-purpose direct VO regression 
-              network. Second, we demonstrate multi-modal supervision, including segmentation, 
-              flow, depth, and audio auxiliary prediction tasks, to facilitate generalized 
-              representations for the VO task. Specifically, we find audio prediction task 
-              to significantly enhance the semi-supervised learning process while alleviating 
-              noisy pseudo-labels, particularly in highly dynamic and out-of-domain video data. 
-              Our proposed teacher network achieves state-of-the-art performance on the commonly 
-              used KITTI benchmark despite no multi-frame optimization or knowledge of camera 
-              parameters. Combined with the proposed semi-supervised step, XVO demonstrates 
-              off-the-shelf knowledge transfer across diverse conditions on KITTI, nuScenes, 
-              and Argoverse without fine-tuning. 
+                  We introduce ZeroVO, a novel visual odometry (VO) algorithm that achieves zero-shot generalization across diverse cameras and environments, overcoming limitations in existing methods that depend on predefined or static camera calibration setups. Our approach incorporates three main innovations. First, we design a calibration-free, geometry-aware network structure capable of handling noise in estimated depth and camera parameters. Second, we introduce a language-based prior that infuses semantic information to enhance robust feature extraction and generalization to previously unseen domains. Third, we develop a flexible, semi-supervised training paradigm that iteratively adapts to new scenes using unlabeled data, further boosting the models' ability to generalize across diverse real-world scenarios. We analyze complex autonomous driving contexts, demonstrating over 30% improvement against prior methods on three standard benchmarks, KITTI, nuScenes, and Argoverse 2, as well as a newly introduced, high-fidelity synthetic dataset derived from Grand Theft Auto (GTA). By not requiring fine-tuning or camera calibration, our work broadens the applicability of VO, providing a versatile solution for real-world deployment at scale.
             </p>
           </div>
         </div>
@@ -396,7 +384,7 @@
           <div class="column is-four-fifths">
             <h2 class="title is-3">Qualitative Examples</h2>
               <video controls>
-              <source src="./resources/XVO.mp4" type="video/mp4">
+              <source src="./resources/examples.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -440,10 +428,10 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <a href="./resources/XVO.pdf" class="large-font bottom_buttons">
+        <a href="./resources/CAMERA_READY.pdf" class="large-font bottom_buttons">
           <i class="fas fa-file-pdf"></i>
         </a>
-        <a href="https://github.com/h2xlab/XVO" class="large-font bottom_buttons">
+        <a href="https://github.com/h2xlab/ZVO" class="large-font bottom_buttons">
           <i class="fab fa-github"></i>
         </a>
         <br />
